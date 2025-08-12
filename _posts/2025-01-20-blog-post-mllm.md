@@ -2,7 +2,7 @@
 title: "Multimodal Large Language Models"
 date: 2025-01-20
 
-excerpt: "A comprehensive guide to Multimodal Large Language Models"
+excerpt: "A comprehensive guide to Multimodal Large Language Models published on the neptune.ai blog. "
 tags:
   - MLLM
   - LLMOPs
