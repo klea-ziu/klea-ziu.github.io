@@ -1,7 +1,7 @@
 ---
 title: 'Multimodal Large Language Models'
 date: 2025-01-20
-permalink: [/posts/2025/01/blog-post-mllm/](https://neptune.ai/blog/multimodal-large-language-models)
+permalink: https://neptune.ai/blog/multimodal-large-language-models
 tags:
   - MLLM
   - LLMOPs
