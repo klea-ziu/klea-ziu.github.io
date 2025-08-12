@@ -1,6 +1,6 @@
 ---
 title: "Multimodal Large Language Models"
-date: 2025-08-12
+date: 2025-01-20
 
 excerpt: "A comprehensive guide to Multimodal Large Language Models"
 tags:
