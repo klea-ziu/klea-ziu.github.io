@@ -4,7 +4,7 @@ date: 2025-07-23
 excerpt: "My  blog post published on neptune.ai about gradient issues in foundation models."
 ---
 
-I've published a new blog post on neptune.ai about monitoring and solving gradient issues in foundation models.
+I've published a new blog post on [neptune.ai](https://neptune.ai/) about monitoring and solving gradient issues in foundation models.
 
 **[Read the full article on Neptune.ai →](https://neptune.ai/blog/monitoring-diagnosing-and-solving-gradient-issues-in-foundation-models)**
 
