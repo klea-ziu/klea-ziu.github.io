@@ -12,7 +12,7 @@ tags:
 
 I've published a comprehensive guide about Multimodal Large Language Models (MLLMs) on [neptune.ai](https://neptune.ai/).
 
-**[Read the full article on Neptune.ai →](https://neptune.ai/blog/multimodal-large-language-models)**
+**[Read the full article on neptune.ai →](https://neptune.ai/blog/multimodal-large-language-models)**
 
 ## What you'll learn:
 
@@ -24,8 +24,8 @@ The article covers:
 - **Key challenges**: Alignment of heterogeneous data, inherited biases, and robustness limitations
 
 
-**[Continue reading the full guide on Neptune.ai →](https://neptune.ai/blog/multimodal-large-language-models)**
+**[Continue reading the full guide on neptune.ai →](https://neptune.ai/blog/multimodal-large-language-models)**
 
 ---
 
-*This post was originally published on [Neptune.ai](https://neptune.ai/blog/multimodal-large-language-models) as part of their technical blog series.*
+*This post was originally published on [neptune.ai](https://neptune.ai/blog/multimodal-large-language-models) as part of their technical blog series.*
