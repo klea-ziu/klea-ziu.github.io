@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$ROOT_DIR"
+
+if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
+  echo "Starting site with Docker Compose at http://localhost:4000"
+  exec docker compose up --build
+fi
+
+if ! command -v bundle >/dev/null 2>&1; then
+  echo "Error: bundler is not installed."
+  echo "Install Ruby/Bundler, or use Docker Desktop and rerun ./scripts/dev."
+  exit 1
+fi
+
+mkdir -p .bundle_home .bundle_cache .bundle_config vendor/bundle
+export HOME="$ROOT_DIR/.bundle_home"
+export BUNDLE_USER_HOME="$ROOT_DIR/.bundle_home"
+export BUNDLE_USER_CACHE="$ROOT_DIR/.bundle_cache"
+export BUNDLE_USER_CONFIG="$ROOT_DIR/.bundle_config"
+
+bundle config set --local path "vendor/bundle"
+
+if ! bundle check >/dev/null 2>&1; then
+  echo "Installing Ruby gems locally into vendor/bundle..."
+  bundle install
+fi
+
+echo "Serving site at http://localhost:4000"
+exec bundle exec jekyll serve -l -H localhost --port 4000
