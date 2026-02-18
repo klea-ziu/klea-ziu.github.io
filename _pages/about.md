@@ -9,6 +9,8 @@ redirect_from:
 
 ## Official Bio
 
+**Last updated:** February 18, 2026
+
 I am a PhD student at **MBZUAI** working at the intersection of machine learning, chemistry, and catalysis. My research focuses on developing reliable and data-efficient ML methods for scientific discovery, including Neural ODEs for reaction kinetics, graph neural networks (GNNs) for catalyst design, and ML-based prediction of partial density of states (pDOS). By combining chemical domain knowledge with modern ML, I aim to accelerate catalyst discovery, improve reaction efficiency, and support scalable solutions for clean energy and low-emission industrial processes.
 
 ## Research Interests
