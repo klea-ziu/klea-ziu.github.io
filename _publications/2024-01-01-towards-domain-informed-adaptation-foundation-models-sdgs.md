@@ -1,10 +1,10 @@
 ---
-title: "Towards Domain-Informed Adaptation of Foundation Models for Sustainable Development Goals"
+title: "Towards Domain-Informed Machine Learned Models from High Throughput Experimental Data"
 collection: publications
 category: conferences
-permalink: /publication/2024-01-01-towards-domain-informed-adaptation-foundation-models-sdgs
-excerpt: 'Domain-informed adaptation approach for foundation models targeting Sustainable Development Goals.'
-date: 2024-01-01
-venue: 'Conference paper'
+permalink: /publication/2023-01-01-towards-domain-informed-machine-learned-models
+excerpt: 'Domain-informed machine-learned models from high-throughput experimental data.'
+date: 2023-01-01
+venue: '2023 AIChE Annual Meeting'
 ---
 Conference publication.

@@ -1,0 +1,20 @@
+internships:
+  - role: "Research Intern"
+    organization: "MBZUAI"
+    period: "YYYY - YYYY"
+    location: "Abu Dhabi, UAE"
+    details: "Add a short internship description here."
+
+work_experience:
+  - role: "Research Assistant"
+    organization: "Organization Name"
+    period: "YYYY - Present"
+    location: "City, Country"
+    details: "Add a short work experience description here."
+
+volunteering_service:
+  - role: "Volunteer Role"
+    organization: "Conference / Organization"
+    period: "YYYY - YYYY"
+    location: ""
+    details: "Add a short volunteering/service description here."
