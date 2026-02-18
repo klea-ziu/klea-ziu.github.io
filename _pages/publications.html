@@ -76,3 +76,19 @@ author_profile: true
 {% else %}
   <p>No work experience added yet.</p>
 {% endif %}
+
+<h2>Volunteering Service</h2>
+<hr />
+
+{% if site.data.experience.volunteering_service and site.data.experience.volunteering_service.size > 0 %}
+  <ul>
+  {% for item in site.data.experience.volunteering_service %}
+    <li>
+      <strong>{{ item.role }}</strong>, {{ item.organization }}{% if item.period %} ({{ item.period }}){% endif %}{% if item.location %}, {{ item.location }}{% endif %}
+      {% if item.details %}<br>{{ item.details }}{% endif %}
+    </li>
+  {% endfor %}
+  </ul>
+{% else %}
+  <p>No volunteering service added yet.</p>
+{% endif %}
