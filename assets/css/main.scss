@@ -41,3 +41,28 @@
     "vendor/font-awesome/solid",
     "vendor/font-awesome/brands"
 ;
+
+/* Page-level visual cleanup for archive pages (Blog, Research) */
+.archive .page__title {
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", serif;
+  font-weight: 700;
+  color: #1f2a44;
+  letter-spacing: 0.2px;
+}
+
+.archive .archive__subtitle {
+  color: #7b8391;
+}
+
+.archive .archive__item-title,
+.archive .archive__item-title a {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  color: #0a6d8a;
+  text-decoration-color: #0a6d8a;
+}
+
+.archive .archive__item-title a:hover,
+.archive .archive__item-title a:focus {
+  color: #07556b;
+  text-decoration-color: #07556b;
+}
