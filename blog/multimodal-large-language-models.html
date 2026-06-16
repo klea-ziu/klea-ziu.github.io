@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Multimodal Large Language Models | Klea Ziu</title>
+    <meta name="description" content="An overview of multimodal large language models, their architecture, examples, challenges, and future directions.">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Klea Ziu</a>
+      <nav aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/#research">Research</a>
+        <a href="/blog/">Blog</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <article>
+        <p class="article-date">June 2026</p>
+        <h1>Multimodal large language models</h1>
+        <p class="page-intro">
+          Multimodal LLMs extend language models beyond text, allowing them to reason over images, audio, video, documents, and other signals.
+        </p>
+
+        <div class="article-body">
+          <p>
+            Imagine asking a robot to clean a spilled drink while it uses visual context to locate the table, language to understand your instruction, and spatial reasoning to decide how to act. Or imagine translating "the glasses are broken" while using an image to decide whether the sentence refers to drinking glasses or eyeglasses. These are the kinds of ambiguities that multimodal systems are designed to handle.
+          </p>
+
+          <p>
+            Large language models are powerful at processing text, but the real world rarely arrives as text alone. We communicate through images, speech, movement, diagrams, tables, and physical context. Multimodal large language models, often called MLLMs, aim to combine these channels into a richer representation of the task.
+          </p>
+
+          <h2>What is a multimodal LLM?</h2>
+          <p>
+            A modality is a channel of information: text, image, audio, video, touch, sensor readings, or structured data. A multimodal model can process more than one of these channels and use them together. In practice, many current MLLMs combine language with vision, though audio, video, robotics states, and document layouts are becoming increasingly important.
+          </p>
+
+          <p>
+            The key idea is not simply accepting multiple file types. The goal is to learn relationships across modalities. Text can describe location and intent; images can show objects, layout, and visual context; audio can provide tone or speaker information; video can show temporal change. When these signals are aligned, the model can answer questions that would be difficult from any single modality alone.
+          </p>
+
+          <h2>Why multimodal models matter</h2>
+          <p>
+            Many high-value applications are naturally multimodal. In healthcare, a model might combine X-rays, clinical reports, lab values, and physician notes. In education, it might explain a diagram and adapt its response to a student's question. In robotics, it may need to use text instructions, camera images, and world state to plan actions.
+          </p>
+
+          <ul>
+            <li><strong>Content creation:</strong> generating captions, visual explanations, image-grounded stories, or presentation material.</li>
+            <li><strong>Human-machine interaction:</strong> responding naturally to text, speech, screenshots, images, or mixed inputs.</li>
+            <li><strong>Contextual understanding:</strong> interpreting sentiment, video, documents, diagrams, or product images with surrounding text.</li>
+            <li><strong>Cross-modal learning:</strong> using information from one modality to improve performance in another.</li>
+            <li><strong>Recommendation systems:</strong> combining reviews, images, usage behavior, and metadata for more relevant suggestions.</li>
+            <li><strong>Scientific and medical domains:</strong> connecting visual evidence with structured records and written expert knowledge.</li>
+          </ul>
+
+          <h2>How multimodal LLMs work</h2>
+          <p>
+            A typical multimodal LLM has three major parts: an input module, a fusion or alignment module, and an output module.
+          </p>
+
+          <p>
+            The input module uses encoders specialized for different data types. A text encoder represents language, a vision encoder represents images, and an audio encoder may represent speech or sound. These encoders turn raw inputs into embeddings that the rest of the model can process.
+          </p>
+
+          <p>
+            The fusion module aligns and combines the representations. This step is central. The model needs to connect visual regions with words, audio segments with events, or document layout with text meaning. Modern systems often use transformer-based cross-attention, projection layers, or shared embedding spaces to bring modalities together.
+          </p>
+
+          <p>
+            The output module generates the final response: a text answer, a classification, a caption, a plan, a generated image, or another task-specific output. Some systems generate only text, while newer systems can produce interleaved text and images.
+          </p>
+
+          <h2>Examples of multimodal LLMs</h2>
+          <h2>Microsoft Kosmos-1</h2>
+          <p>
+            Kosmos-1 is a multimodal model designed for language and perception-intensive tasks such as visual dialogue, visual question answering, image captioning, OCR-free language understanding, simple math from images, and zero-shot image classification. It was trained on web-scale multimodal corpora containing text, image-caption pairs, and interleaved image-text data.
+          </p>
+
+          <p>
+            A useful lesson from Kosmos-1 is that cross-modal transfer matters. Knowledge learned from text can help visual tasks, and visual context can improve language tasks. One limitation, however, is context length: when the input budget is small, complex multimodal prompts can quickly exceed the available tokens.
+          </p>
+
+          <h2>Google PaLM-E</h2>
+          <p>
+            PaLM-E extends language modeling into embodied reasoning. It can ingest information such as images and robot states, map them into a language-model-compatible representation, and use that information for tasks like robot planning, visual question answering, and scene understanding.
+          </p>
+
+          <p>
+            PaLM-E shows why multimodality is especially important in robotics and real-world reasoning. A robot does not operate on text alone. It needs to connect language instructions with perception, state, and action.
+          </p>
+
+          <h2>Google Gemini</h2>
+          <p>
+            Gemini models are built to handle sequences that may include text, images, audio, and video. This makes them useful for tasks like understanding natural images, summarizing scanned documents, interpreting diagrams, and reasoning across temporally related video or audio inputs.
+          </p>
+
+          <p>
+            The important point is that multimodality is not only about recognition. It also supports reasoning: understanding a chart, rearranging a figure, explaining a diagram, or generating code based on visual instructions.
+          </p>
+
+          <h2>Flamingo</h2>
+          <p>
+            Flamingo is a family of visual language models that can process sequences of text interleaved with images and videos. It uses frozen pretrained components - a vision model and a language model - with added cross-attention layers to connect visual tokens with language reasoning.
+          </p>
+
+          <p>
+            Flamingo is notable for few-shot prompting across image and video understanding tasks. It shows how multimodal systems can adapt quickly when given a few examples, even without task-specific training for every new benchmark.
+          </p>
+
+          <h2>Challenges and limitations</h2>
+          <p>
+            Multimodal models are promising, but they introduce new technical and ethical challenges.
+          </p>
+
+          <ul>
+            <li><strong>Representation:</strong> different modalities have different structures, scales, and noise patterns. Building a unified representation is difficult.</li>
+            <li><strong>Alignment:</strong> the model must connect the right words, image regions, audio segments, or video frames.</li>
+            <li><strong>Reasoning:</strong> multimodal tasks often require multi-step reasoning across conflicting or incomplete evidence.</li>
+            <li><strong>Generation:</strong> outputs must remain consistent across modalities and avoid hallucinated details.</li>
+            <li><strong>Transfer:</strong> knowledge learned in one modality may not transfer cleanly to another, especially under distribution shift.</li>
+            <li><strong>Evaluation:</strong> measuring whether text, image, and audio are jointly understood is much harder than scoring a single text output.</li>
+            <li><strong>Privacy and bias:</strong> images, audio, and video can contain sensitive personal information and amplify dataset biases.</li>
+          </ul>
+
+          <h2>What comes next</h2>
+          <p>
+            The next stage of multimodal AI will likely expand beyond text-image systems toward richer modalities: video, audio, 3D scenes, web pages, tables, figures, scientific measurements, and embodied sensor streams. Better fusion methods will be needed as inputs become more complex.
+          </p>
+
+          <p>
+            Domain adaptation will also matter. A general multimodal model may be impressive, but healthcare, finance, robotics, and scientific discovery each require domain-specific data, evaluation, safety constraints, and interpretability.
+          </p>
+
+          <p>
+            The broader trajectory is clear: models are moving from text prediction toward systems that can perceive, reason, and act across the mixed signals of the real world.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>Klea Ziu</p>
+      <div class="link-row">
+        <a href="https://scholar.google.com/citations?user=JLqxspUAAAAJ">Scholar</a>
+        <a href="https://github.com/klea-ziu">GitHub</a>
+        <a href="https://www.linkedin.com/in/klea-ziu">LinkedIn</a>
+      </div>
+    </footer>
+  </body>
+</html>

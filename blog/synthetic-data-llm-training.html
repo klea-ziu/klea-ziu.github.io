@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Synthetic Data for LLM Training | Klea Ziu</title>
+    <meta name="description" content="A guide to synthetic data for LLM training, including use cases, generation methods, limitations, and applications in medical imaging, tabular data, and code.">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Klea Ziu</a>
+      <nav aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/#research">Research</a>
+        <a href="/blog/">Blog</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <article>
+        <p class="article-date">June 2026</p>
+        <h1>Synthetic data for LLM training</h1>
+        <p class="page-intro">
+          Synthetic data is becoming central to foundation model training, especially when real data is scarce, sensitive, expensive, or legally restricted.
+        </p>
+
+        <div class="article-body">
+          <div class="callout">
+            <strong>TL;DR:</strong> Synthetic data can expand datasets, protect privacy, and improve coverage of rare cases, but it must be evaluated carefully to avoid bias amplification, hallucinated labels, and poor generalization.
+          </div>
+
+          <p>
+            Training foundation models at scale is constrained by data. Whether working with text, code, images, or multimodal inputs, public datasets are increasingly saturated and private datasets are difficult to access. Collecting and curating new data is slow and expensive, while the demand for larger and more diverse corpora keeps growing.
+          </p>
+
+          <p>
+            Synthetic data - artificially generated information that mimics real-world data - offers a practical way to fill some of these gaps. When blended with collected datasets, it can improve robustness, scalability, and compliance. But synthetic data is not a universal replacement for real data. Its value depends on the domain, generation method, and evaluation process.
+          </p>
+
+          <h2>When is synthetic data suitable?</h2>
+          <p>
+            Synthetic data is most useful when real data is limited, sensitive, rare, or costly to label. It can expand small datasets, balance rare classes, simulate edge cases, and let teams test systems before deployment.
+          </p>
+
+          <h2>Vision and healthcare</h2>
+          <p>
+            Medical imaging is one of the clearest use cases. Training diagnostic models for tumor detection, organ segmentation, or disease classification requires many high-quality labeled scans. These images are costly to annotate and restricted by privacy laws and data-sharing agreements.
+          </p>
+
+          <p>
+            Synthetic medical images and patient records can preserve useful statistical structure while protecting privacy. They can help balance rare disease categories, test diagnostic systems, and expand datasets for tasks such as MRIs, CT scans, X-rays, and ultrasound.
+          </p>
+
+          <h2>Financial tabular data</h2>
+          <p>
+            Financial data is highly sensitive and heavily regulated. Synthetic tabular data can mimic real distributions without revealing customer information, making it easier to test fraud detection, anomaly detection, risk models, and stress-test scenarios.
+          </p>
+
+          <p>
+            The challenge is that tabular data often contains complex constraints. A realistic synthetic record must not only match distributions; it must also respect domain logic.
+          </p>
+
+          <h2>Software code</h2>
+          <p>
+            Synthetic code is useful because code can be evaluated more directly than many other modalities. Generated code can be compiled, unit-tested, executed, and corrected in feedback loops. This makes synthetic code generation a strong candidate for training coding assistants and models for code completion, debugging, and program synthesis.
+          </p>
+
+          <h2>Text</h2>
+          <p>
+            Text is where the limits of synthetic data are most visible. Large language models can generate huge amounts of text, but quality is subjective and context-dependent. Synthetic text may become generic, shallow, repetitive, or misaligned with human preferences.
+          </p>
+
+          <p>
+            This is why methods such as instruction tuning, reinforcement learning from human feedback, and careful human evaluation remain important. Synthetic text can enrich training data, but it should not replace human-written or human-validated data blindly.
+          </p>
+
+          <h2>How synthetic data is generated</h2>
+          <p>
+            The right generation method depends on the data type and the structure that must be preserved. Common approaches include statistical models, Bayesian networks, GANs, variational autoencoders, diffusion models, LLMs, and meta-learning systems.
+          </p>
+
+          <h2>Medical imaging</h2>
+          <p>
+            In medical imaging, generative adversarial networks and diffusion models are widely used. GANs train a generator and discriminator together: the generator creates synthetic images, while the discriminator tries to distinguish generated images from real ones. Over time, the generator learns to produce images that look more realistic.
+          </p>
+
+          <p>
+            GAN-based methods have been used for image reconstruction, denoising, super-resolution, and modality translation across MRIs, CT scans, X-rays, and ultrasound. However, GANs can be unstable to train, may lack generalizability, and often require clinical validation before they are useful in practice.
+          </p>
+
+          <p>
+            Diffusion models work differently. They learn to add noise to data and then reverse the process step by step. Latent diffusion improves efficiency by performing this process in a compressed latent space. Medical diffusion systems can generate realistic 3D scans, segmentation masks, or domain-conditioned images, but they still face high computational cost, limited clinical validation, and demographic bias risks.
+          </p>
+
+          <h2>Tabular data</h2>
+          <p>
+            Synthetic tabular data is used in healthcare, finance, education, transportation, and other domains where privacy restrictions limit data sharing. Generation methods include GANs, diffusion models, LLM-based approaches, post-processing pipelines, and meta-learning methods.
+          </p>
+
+          <p>
+            GAN-based tabular methods can model categorical and continuous variables, but they often struggle with training instability, mode collapse, and multimodal distributions. Diffusion methods such as tabular denoising approaches can better model heterogeneous features and inter-column dependencies.
+          </p>
+
+          <p>
+            LLM-based approaches convert table rows into text-like formats and generate new examples through prompting or fine-tuning. They are flexible, but they can hallucinate invalid values, violate constraints, or produce unrealistic records. Post-processing and domain validation are therefore essential.
+          </p>
+
+          <h2>Meta-learning and TabPFN</h2>
+          <p>
+            TabPFN is a notable example of a tabular foundation model trained entirely on synthetic data. It is pretrained on many synthetic tabular datasets generated from structural causal models, learning how to predict masked targets across small supervised learning tasks.
+          </p>
+
+          <p>
+            This approach works especially well for small to medium-sized datasets. Its limits appear when real data differs from the synthetic pretraining distribution or when datasets become large enough that gradient boosting and ensemble methods remain stronger.
+          </p>
+
+          <h2>Code generation</h2>
+          <p>
+            LLMs can generate synthetic code from natural language prompts, function signatures, tests, and input-output examples. Open-weight code models and coding assistants show how synthetic code can support code completion, debugging, and program synthesis.
+          </p>
+
+          <p>
+            A major advantage of code is automatic verification. Generated code can be run, compiled, unit-tested, and corrected. This makes iterative self-improvement more practical than in open-ended text generation, where evaluation is often subjective.
+          </p>
+
+          <h2>Limitations and risks</h2>
+          <ul>
+            <li><strong>Evaluation:</strong> synthetic data must be tested for fidelity, diversity, privacy, and downstream model performance.</li>
+            <li><strong>Missing ground truth:</strong> generated labels may be wrong or impossible to verify at scale.</li>
+            <li><strong>Overfitting:</strong> models may learn artifacts of the generator rather than useful real-world structure.</li>
+            <li><strong>Bias amplification:</strong> synthetic data can reproduce or intensify biases in the real training data.</li>
+            <li><strong>Domain violations:</strong> generated records may look plausible but violate scientific, medical, or financial constraints.</li>
+            <li><strong>Privacy leakage:</strong> poor generation methods may memorize and reproduce sensitive examples.</li>
+          </ul>
+
+          <h2>What comes next</h2>
+          <p>
+            Synthetic data is not perfect, but it is becoming an important complement to real datasets. It is especially valuable when real-world data is limited, constrained, imbalanced, or expensive to collect.
+          </p>
+
+          <p>
+            The strongest workflows will not simply generate more data. They will combine generation, filtering, validation, human review, privacy testing, and downstream evaluation. Synthetic data is useful when it helps models learn what matters, not when it merely makes datasets larger.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>Klea Ziu</p>
+      <div class="link-row">
+        <a href="https://scholar.google.com/citations?user=JLqxspUAAAAJ">Scholar</a>
+        <a href="https://github.com/klea-ziu">GitHub</a>
+        <a href="https://www.linkedin.com/in/klea-ziu">LinkedIn</a>
+      </div>
+    </footer>
+  </body>
+</html>

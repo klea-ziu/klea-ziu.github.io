@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>How to Monitor Gradient Issues in Foundation Models | Klea Ziu</title>
+    <meta name="description" content="A practical guide to monitoring, diagnosing, and solving vanishing and exploding gradients in foundation models using PyTorch and Weights & Biases.">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Klea Ziu</a>
+      <nav aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/#research">Research</a>
+        <a href="/blog/">Blog</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <article>
+        <p class="article-date">June 2026</p>
+        <h1>How to monitor, diagnose, and solve gradient issues in foundation models</h1>
+        <p class="page-intro">
+          Vanishing and exploding gradients are common training instabilities in large models. Layer-wise gradient tracking helps detect them early and identify where they start.
+        </p>
+
+        <div class="article-body">
+          <div class="callout">
+            <strong>TL;DR:</strong> Track gradient norms across layers, compare them with loss curves, and use Weights & Biases to visualize when specific blocks start vanishing, exploding, or failing to learn.
+          </div>
+
+          <p>
+            As foundation models scale to billions of parameters, they become more prone to training instability. During pretraining or large fine-tuning runs, it is common to see loss spikes, silent non-convergence, or sudden divergence to NaN values. These failures are often connected to vanishing or exploding gradients.
+          </p>
+
+          <p>
+            In this post, we look at why gradients explode or vanish, why foundation models are sensitive to these issues, how to track gradients across layers, and which stabilization techniques are most useful.
+          </p>
+
+          <h2>What gradient issues occur during training?</h2>
+          <p>
+            Foundation models are usually trained with adaptive gradient-based optimizers such as Adam or AdamW. At a high level, parameters are updated by subtracting a scaled gradient of the loss:
+          </p>
+
+          <pre><code>theta = theta - learning_rate * gradient(loss, theta)</code></pre>
+
+          <p>
+            During the forward pass, the model computes predictions and loss. During the backward pass, gradients are propagated through the model using the chain rule. In deep architectures, repeated multiplication through many layers can shrink gradients toward zero or make them grow uncontrollably.
+          </p>
+
+          <h2>Vanishing gradients</h2>
+          <p>
+            Vanishing gradients occur when gradients become extremely small as they move backward through the network. Earlier layers then receive almost no useful update. Training becomes slow, unstable, or effectively frozen.
+          </p>
+
+          <p>
+            This can happen when activation derivatives are small, when many units are inactive, or when weight matrices have norms below one across many layers. With ReLU, for example, inactive neurons have zero derivative, so gradient flow stops for those paths. In very deep networks, even small shrinkage at each layer can compound into a near-zero signal.
+          </p>
+
+          <h2>Exploding gradients</h2>
+          <p>
+            Exploding gradients are the opposite failure mode. Gradients grow exponentially during backpropagation, causing large parameter updates. The model may oscillate, diverge, or produce NaN loss values.
+          </p>
+
+          <p>
+            This often happens when the product of weight norms and activation derivatives is repeatedly greater than one. In large-scale models, the issue can appear as sudden loss spikes, instability in specific blocks, or training collapse during early optimization.
+          </p>
+
+          <h2>Why track gradients layer by layer?</h2>
+          <p>
+            Layer-wise gradient monitoring helps with three stages of debugging.
+          </p>
+
+          <ul>
+            <li><strong>Discovery:</strong> confirm whether gradients are becoming too small, too large, or NaN during training.</li>
+            <li><strong>Root-cause analysis:</strong> identify which layer, block, or parameter group first becomes unstable.</li>
+            <li><strong>Validation:</strong> check whether a mitigation strategy, such as clipping or learning-rate changes, actually improves training.</li>
+          </ul>
+
+          <h2>Gradient-norm tracking in PyTorch with Weights & Biases</h2>
+          <p>
+            Gradient norm tracking calculates the norm of gradients for selected model parameters during backpropagation. The L2 norm is commonly used because it gives a smooth measure of gradient magnitude and makes extreme values easy to spot.
+          </p>
+
+          <p>
+            The example below tracks a BERT-style sequence classification model in PyTorch and logs results to Weights & Biases. For large models, you should usually log selected layers or aggregate norms at the block level rather than logging every parameter every step.
+          </p>
+
+          <h2>Step 1: Initialize W&B</h2>
+          <pre><code>import random
+import wandb
+
+wandb.init(
+    project="foundation-model-gradient-tracking",
+    name=f"gradient-tracking-{random.random():.5f}",
+    tags=["gradient_tracking", "pytorch", "transformers"],
+    config={
+        "learning_rate": 1e-1,
+        "batch_size": 1,
+        "optimizer": "Adam",
+    },
+)</code></pre>
+
+          <p>
+            Tags and config values make experiments easier to search, compare, and reproduce when you run multiple learning rates, architectures, or datasets.
+          </p>
+
+          <h2>Step 2: Define a gradient logging function</h2>
+          <pre><code>import torch
+
+def log_gradient_norms(model, step, log_every_n_steps=1):
+    """Log L2 gradient norms for model parameters."""
+    if step % log_every_n_steps != 0:
+        return
+
+    metrics = {}
+    with torch.no_grad():
+        for name, param in model.named_parameters():
+            if param.grad is not None:
+                metrics[f"gradients/{name}"] = param.grad.norm().item()
+
+    wandb.log(metrics, step=step)</code></pre>
+
+          <p>
+            Computing L2 norms is inexpensive, but logging every parameter in a foundation model can become noisy and costly. In practice, monitor the most informative components: embeddings, attention layers, MLP blocks, output heads, or aggregated block-level norms. Reducing logging frequency, for example logging every 10 or 100 steps, also helps.
+          </p>
+
+          <h2>Step 3: Train and log loss</h2>
+          <pre><code>import torch.optim as optim
+
+optimizer = optim.Adam(model.parameters(), lr=1e-1)
+model.train()
+
+global_step = 0
+for epoch in range(10):
+    for batch in train_dataloader:
+        inputs = {
+            key: value.to("cuda")
+            for key, value in batch.items()
+            if key in tokenizer.model_input_names
+        }
+        labels = batch["labels"].to("cuda")
+
+        optimizer.zero_grad()
+        outputs = model(**inputs, labels=labels)
+        loss = outputs.loss
+        loss.backward()
+
+        log_gradient_norms(model, global_step, log_every_n_steps=10)
+        optimizer.step()
+
+        wandb.log({"loss": loss.item()}, step=global_step)
+        global_step += 1
+
+wandb.finish()</code></pre>
+
+          <p>
+            If the learning rate is too high, loss and gradient norms may quickly diverge to NaN. If the learning rate is too low, the loss may stay high while gradients in some layers shrink. The point of tracking gradients is to see where that behavior begins, not just that the final loss looks bad.
+          </p>
+
+          <h2>Diagnosing training issues</h2>
+          <p>
+            Once gradient tracking is in place, compare loss curves with layer-wise gradient norms. If loss diverges and gradient norms explode in later layers first, the learning rate may be too aggressive or clipping may be needed. If earlier blocks show near-zero gradients while the output layer still changes, you may be seeing vanishing gradients or inactive layers.
+          </p>
+
+          <p>
+            In one typical BERT-style debugging setup, a very large learning rate can cause both loss and gradient norms to become NaN within a few steps. Reducing the learning rate may prevent immediate divergence, but the model can still fail to converge if gradients in key layers do not evolve. Lowering the learning rate further, adding warmup, or adjusting initialization can produce smoother loss and more meaningful gradient flow.
+          </p>
+
+          <h2>Techniques for gradient stabilization</h2>
+          <ul>
+            <li><strong>Gradient clipping:</strong> caps gradient magnitude during backpropagation and prevents unusually large updates.</li>
+            <li><strong>Layer normalization:</strong> stabilizes activation scales across features and is a standard component in transformer-based foundation models.</li>
+            <li><strong>Weight initialization:</strong> Xavier, He, truncated normal, and architecture-specific initialization schemes help preserve signal scale across layers.</li>
+            <li><strong>Activation functions:</strong> GELU, Swish, and LeakyReLU can avoid some failure modes associated with plain ReLU in very deep networks.</li>
+            <li><strong>Learning-rate schedules:</strong> warmup and decay reduce early training shocks and help avoid unstable updates.</li>
+          </ul>
+
+          <h2>Wrapping up</h2>
+          <p>
+            Gradient issues can quietly prevent large models from learning. Tracking gradient norms across layers makes the training process more observable: you can see where gradients vanish, where they explode, and whether a fix actually improves the run.
+          </p>
+
+          <p>
+            Weights & Biases is useful here because it gives you a central place to compare loss curves, gradient norms, learning rates, and run configurations across experiments. The more expensive the training run, the more valuable this kind of visibility becomes.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>Klea Ziu</p>
+      <div class="link-row">
+        <a href="https://scholar.google.com/citations?user=JLqxspUAAAAJ">Scholar</a>
+        <a href="https://github.com/klea-ziu">GitHub</a>
+        <a href="https://www.linkedin.com/in/klea-ziu">LinkedIn</a>
+      </div>
+    </footer>
+  </body>
+</html>

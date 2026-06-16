@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>What makes ML for chemistry different? | Klea Ziu</title>
+    <meta name="description" content="A short note by Klea Ziu on machine learning for chemistry.">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">Klea Ziu</a>
+      <nav aria-label="Primary navigation">
+        <a href="/">Home</a>
+        <a href="/#research">Research</a>
+        <a href="/blog/">Blog</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <article>
+        <p class="article-date">June 2026</p>
+        <h1>What makes ML for chemistry different?</h1>
+        <p class="page-intro">
+          A short note on why scientific machine learning often needs a different kind of care than ordinary prediction problems.
+        </p>
+
+        <div class="article-body">
+          <p>
+            Machine learning in chemistry is rarely just a race for the highest score on a benchmark. The datasets are often small, experiments can be expensive, and the most useful answer is not always a single prediction. A model needs to help a scientist decide what to trust, what to test next, and what mechanism might be worth investigating.
+          </p>
+
+          <p>
+            That changes the design problem. Models should use the structure we already know: atoms, bonds, reaction pathways, conservation laws, and electronic properties. Graph neural networks, Neural ODEs, and physics-aware representations are useful because they give the model a better starting point than raw pattern matching.
+          </p>
+
+          <h2>Data is precious</h2>
+          <p>
+            In many chemistry problems, every data point carries real cost. This makes reliability and data efficiency central. A practical model should perform well when observations are limited, noisy, or unevenly distributed across the chemical space.
+          </p>
+
+          <h2>Interpretability matters</h2>
+          <p>
+            A useful scientific model should not only say what it predicts, but also offer clues about why. That does not mean every model must be simple. It means the modeling choices should make it easier to connect outputs back to chemical intuition and experimental decisions.
+          </p>
+
+          <h2>The goal is discovery</h2>
+          <p>
+            The most exciting ML systems for chemistry are not replacements for scientists. They are tools that make exploration faster, sharper, and more systematic.
+          </p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <p>Klea Ziu</p>
+      <div class="link-row">
+        <a href="https://scholar.google.com/citations?user=JLqxspUAAAAJ">Scholar</a>
+        <a href="https://github.com/klea-ziu">GitHub</a>
+        <a href="https://www.linkedin.com/in/klea-ziu">LinkedIn</a>
+      </div>
+    </footer>
+  </body>
+</html>
