@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>How to Monitor Gradient Issues in Foundation Models | Klea Ziu</title>
-    <meta name="description" content="A practical guide to monitoring, diagnosing, and solving vanishing and exploding gradients in foundation models using PyTorch and Weights & Biases.">
+    <meta name="description" content="A practical guide to monitoring, diagnosing, and solving vanishing and exploding gradients in foundation models using PyTorch and a runnable Colab notebook.">
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
@@ -27,7 +27,15 @@
 
         <div class="article-body">
           <div class="callout">
-            <strong>TL;DR:</strong> Track gradient norms across layers, compare them with loss curves, and use Weights & Biases to visualize when specific blocks start vanishing, exploding, or failing to learn.
+            <strong>TL;DR:</strong> Track gradient norms across layers, compare them with loss curves, and visualize when specific blocks start vanishing, exploding, or failing to learn.
+          </div>
+
+          <div class="callout">
+            <strong>Runnable demo:</strong> Open the cleaned notebook on
+            <a href="https://github.com/klea-ziu/klea-ziu.github.io/blob/master/notebooks/gradient_issues_foundation_models_demo.ipynb">GitHub</a>
+            or
+            <a href="https://colab.research.google.com/github/klea-ziu/klea-ziu.github.io/blob/master/notebooks/gradient_issues_foundation_models_demo.ipynb">Colab</a>.
+            It is based on the original Neptune demo, but logs locally with matplotlib so no Neptune project or API token is required.
           </div>
 
           <p>
@@ -78,39 +86,30 @@
             <li><strong>Validation:</strong> check whether a mitigation strategy, such as clipping or learning-rate changes, actually improves training.</li>
           </ul>
 
-          <h2>Gradient-norm tracking in PyTorch with Weights & Biases</h2>
+          <h2>Gradient-norm tracking in PyTorch</h2>
           <p>
             Gradient norm tracking calculates the norm of gradients for selected model parameters during backpropagation. The L2 norm is commonly used because it gives a smooth measure of gradient magnitude and makes extreme values easy to spot.
           </p>
 
           <p>
-            The example below tracks a BERT-style sequence classification model in PyTorch and logs results to Weights & Biases. For large models, you should usually log selected layers or aggregate norms at the block level rather than logging every parameter every step.
+            The runnable notebook tracks a BERT-style sequence classification model in PyTorch and plots the metrics directly in Colab. For large models, you should usually log selected layers or aggregate norms at the block level rather than logging every parameter every step.
           </p>
 
-          <h2>Step 1: Initialize W&B</h2>
-          <pre><code>import random
-import wandb
+          <h2>Step 1: Create a local metric history</h2>
+          <pre><code>history = []
 
-wandb.init(
-    project="foundation-model-gradient-tracking",
-    name=f"gradient-tracking-{random.random():.5f}",
-    tags=["gradient_tracking", "pytorch", "transformers"],
-    config={
-        "learning_rate": 1e-1,
-        "batch_size": 1,
-        "optimizer": "Adam",
-    },
-)</code></pre>
+def log_metrics(metrics, step):
+    history.append({"step": step, **metrics})</code></pre>
 
           <p>
-            Tags and config values make experiments easier to search, compare, and reproduce when you run multiple learning rates, architectures, or datasets.
+            This keeps the demo self-contained. In a production run, the same metric dictionary can be sent to a real experiment tracker only after the project exists and the link has been verified.
           </p>
 
           <h2>Step 2: Define a gradient logging function</h2>
           <pre><code>import torch
 
 def log_gradient_norms(model, step, log_every_n_steps=1):
-    """Log L2 gradient norms for model parameters."""
+    """Record L2 gradient norms for model parameters."""
     if step % log_every_n_steps != 0:
         return
 
@@ -120,7 +119,7 @@ def log_gradient_norms(model, step, log_every_n_steps=1):
             if param.grad is not None:
                 metrics[f"gradients/{name}"] = param.grad.norm().item()
 
-    wandb.log(metrics, step=step)</code></pre>
+    log_metrics(metrics, step=step)</code></pre>
 
           <p>
             Computing L2 norms is inexpensive, but logging every parameter in a foundation model can become noisy and costly. In practice, monitor the most informative components: embeddings, attention layers, MLP blocks, output heads, or aggregated block-level norms. Reducing logging frequency, for example logging every 10 or 100 steps, also helps.
@@ -150,10 +149,9 @@ for epoch in range(10):
         log_gradient_norms(model, global_step, log_every_n_steps=10)
         optimizer.step()
 
-        wandb.log({"loss": loss.item()}, step=global_step)
+        log_metrics({"loss": loss.item()}, step=global_step)
         global_step += 1
-
-wandb.finish()</code></pre>
+</code></pre>
 
           <p>
             If the learning rate is too high, loss and gradient norms may quickly diverge to NaN. If the learning rate is too low, the loss may stay high while gradients in some layers shrink. The point of tracking gradients is to see where that behavior begins, not just that the final loss looks bad.
@@ -183,7 +181,7 @@ wandb.finish()</code></pre>
           </p>
 
           <p>
-            Weights & Biases is useful here because it gives you a central place to compare loss curves, gradient norms, learning rates, and run configurations across experiments. The more expensive the training run, the more valuable this kind of visibility becomes.
+            The Colab notebook keeps the demo local, but the same metrics can be sent to Neptune, W&B, MLflow, or another tracker once a real project exists. The more expensive the training run, the more valuable this kind of visibility becomes.
           </p>
         </div>
       </article>
