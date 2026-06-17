@@ -276,9 +276,8 @@ h3 {
 }
 
 .article-body {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 20px;
-  line-height: 1.78;
+  font-size: 18px;
+  line-height: 1.82;
 }
 
 .article-body h2 {
@@ -322,6 +321,110 @@ h3 {
   line-height: 1.6;
 }
 
+.blog-header,
+.blog-index,
+.blog-footer {
+  width: min(780px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.blog-header {
+  padding: 26px 0 42px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.blog-brand {
+  color: #101010;
+  font-size: 32px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.blog-index {
+  padding: 76px 0 86px;
+}
+
+.blog-index h1 {
+  color: #111111;
+  font-family: inherit;
+  font-size: clamp(54px, 8vw, 72px);
+  font-weight: 820;
+  line-height: 1;
+}
+
+.blog-card-list {
+  display: grid;
+  gap: 44px;
+  margin-top: 72px;
+}
+
+.blog-card {
+  padding: 46px 48px 44px;
+  border: 1px solid #dddddd;
+  border-radius: 14px;
+  background: #ffffff;
+}
+
+.blog-card-media {
+  display: block;
+  overflow: hidden;
+  margin: -20px -20px 34px;
+  border-radius: 10px;
+  background: #f3f3f3;
+}
+
+.blog-card-media img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.blog-card-date {
+  margin: 0 0 22px;
+  color: #8d8d8d;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.blog-card h2 {
+  color: #101010;
+  font-family: inherit;
+  font-size: 34px;
+  font-weight: 790;
+  line-height: 1.18;
+}
+
+.blog-card p:not(.blog-card-date) {
+  margin: 20px 0 0;
+  color: #555555;
+  font-size: 29px;
+  line-height: 1.42;
+}
+
+.blog-card a {
+  display: inline-block;
+  margin-top: 34px;
+  color: #0066cc;
+  font-size: 29px;
+  font-weight: 780;
+  text-decoration: none;
+}
+
+.blog-card a:hover {
+  text-decoration: underline;
+}
+
+.blog-footer {
+  padding: 40px 0 44px;
+  color: #999999;
+  font-size: 28px;
+}
+
+.blog-footer p {
+  margin: 0;
+}
+
 @media (max-width: 760px) {
   .site-header {
     align-items: flex-start;
@@ -337,6 +440,33 @@ h3 {
   .two-column {
     grid-template-columns: 1fr;
     gap: 34px;
+  }
+
+  .blog-index {
+    padding: 52px 0 68px;
+  }
+
+  .blog-index h1 {
+    font-size: 48px;
+  }
+
+  .blog-card-list {
+    margin-top: 48px;
+  }
+
+  .blog-card {
+    padding: 30px 28px;
+  }
+
+  .blog-card-date,
+  .blog-card p:not(.blog-card-date),
+  .blog-card a,
+  .blog-footer {
+    font-size: 22px;
+  }
+
+  .blog-card h2 {
+    font-size: 27px;
   }
 
   .hero {
