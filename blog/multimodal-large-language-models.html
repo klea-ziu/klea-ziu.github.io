@@ -30,6 +30,11 @@
             Imagine asking a robot to clean a spilled drink while it uses visual context to locate the table, language to understand your instruction, and spatial reasoning to decide how to act. Or imagine translating "the glasses are broken" while using an image to decide whether the sentence refers to drinking glasses or eyeglasses. These are the kinds of ambiguities that multimodal systems are designed to handle.
           </p>
 
+          <figure class="article-figure">
+            <img src="/images/blog/multimodal-pdf/glasses-translation.png" alt="Broken drinking glasses resolving the ambiguity of translating the word glasses">
+            <figcaption>Visual context can resolve ambiguity that is difficult to solve from text alone.</figcaption>
+          </figure>
+
           <p>
             Large language models are powerful at processing text, but the real world rarely arrives as text alone. We communicate through images, speech, movement, diagrams, tables, and physical context. Multimodal large language models, often called MLLMs, aim to combine these channels into a richer representation of the task.
           </p>
@@ -80,6 +85,11 @@
             Kosmos-1 is a multimodal model designed for language and perception-intensive tasks such as visual dialogue, visual question answering, image captioning, OCR-free language understanding, simple math from images, and zero-shot image classification. It was trained on web-scale multimodal corpora containing text, image-caption pairs, and interleaved image-text data.
           </p>
 
+          <figure class="article-figure">
+            <img src="/images/blog/multimodal-pdf/kosmos-tasks.png" alt="Examples of Kosmos-1 answering questions from images, text, math, and visual prompts">
+            <figcaption>Kosmos-1 examples show how image understanding, OCR-style reasoning, and language generation can be combined.</figcaption>
+          </figure>
+
           <p>
             A useful lesson from Kosmos-1 is that cross-modal transfer matters. Knowledge learned from text can help visual tasks, and visual context can improve language tasks. One limitation, however, is context length: when the input budget is small, complex multimodal prompts can quickly exceed the available tokens.
           </p>
@@ -88,6 +98,11 @@
           <p>
             PaLM-E extends language modeling into embodied reasoning. It can ingest information such as images and robot states, map them into a language-model-compatible representation, and use that information for tasks like robot planning, visual question answering, and scene understanding.
           </p>
+
+          <figure class="article-figure">
+            <img src="/images/blog/multimodal-pdf/palm-e-overview.png" alt="PaLM-E overview showing images, robot states, and text tokens flowing into a language model">
+            <figcaption>PaLM-E combines language inputs with visual and embodied state information for robotics and visual-language tasks.</figcaption>
+          </figure>
 
           <p>
             PaLM-E shows why multimodality is especially important in robotics and real-world reasoning. A robot does not operate on text alone. It needs to connect language instructions with perception, state, and action.
@@ -107,8 +122,27 @@
             Flamingo is a family of visual language models that can process sequences of text interleaved with images and videos. It uses frozen pretrained components - a vision model and a language model - with added cross-attention layers to connect visual tokens with language reasoning.
           </p>
 
+          <figure class="article-figure">
+            <img src="/images/blog/multimodal-pdf/flamingo-architecture.png" alt="Flamingo architecture with frozen vision encoders, perceiver resamplers, and gated cross-attention layers">
+            <figcaption>Flamingo connects frozen vision and language components using trainable cross-attention layers.</figcaption>
+          </figure>
+
           <p>
             Flamingo is notable for few-shot prompting across image and video understanding tasks. It shows how multimodal systems can adapt quickly when given a few examples, even without task-specific training for every new benchmark.
+          </p>
+
+          <h2>LLaVA</h2>
+          <p>
+            LLaVA, the Large Language and Vision Assistant, connects a CLIP vision encoder with an instruction-tuned language model. Visual features are projected into the language model's embedding space so that the model can answer image-grounded questions and follow visual instructions.
+          </p>
+
+          <figure class="article-figure">
+            <img src="/images/blog/multimodal-pdf/llava-architecture.png" alt="LLaVA architecture showing a vision encoder, projection layer, language instruction, and language response">
+            <figcaption>LLaVA maps visual features into the language model input space, enabling multimodal instruction following.</figcaption>
+          </figure>
+
+          <p>
+            This design is practical and flexible, but it also inherits limitations from both the vision encoder and language model, including hallucinations, image perception errors, and biases in the training data.
           </p>
 
           <h2>Challenges and limitations</h2>
@@ -145,6 +179,9 @@
             <li><a href="https://blog.research.google/2023/03/palm-e-embodied-multimodal-language.html">PaLM-E: An Embodied Multimodal Language Model</a></li>
             <li><a href="https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf">Gemini: A Family of Highly Capable Multimodal Models</a></li>
             <li><a href="https://arxiv.org/pdf/2204.14198.pdf">Flamingo: a Visual Language Model for Few-Shot Learning</a></li>
+            <li><a href="https://github.com/haotian-liu/LLaVA">LLaVA: Large Language and Vision Assistant</a></li>
+            <li><a href="https://github.com/openai/CLIP/tree/main?tab=readme-ov-file">CLIP: Contrastive Language-Image Pretraining</a></li>
+            <li><a href="https://palm-e.github.io/assets/palm-e.pdf">PaLM-E paper</a></li>
             <li><a href="https://arxiv.org/pdf/2209.03430.pdf">Foundations and Recent Trends in Multimodal Machine Learning: Principles, Challenges, and Open Questions</a></li>
           </ul>
         </div>

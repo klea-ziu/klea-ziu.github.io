@@ -85,6 +85,11 @@
             In medical imaging, generative adversarial networks and diffusion models are widely used. GANs train a generator and discriminator together: the generator creates synthetic images, while the discriminator tries to distinguish generated images from real ones. Over time, the generator learns to produce images that look more realistic.
           </p>
 
+          <figure class="article-figure">
+            <img src="/images/blog/synthetic/gan-medical-imaging.png" alt="GAN architecture for medical image generation with a generator and discriminator">
+            <figcaption>A GAN trains a generator and discriminator together so synthetic images become harder to distinguish from real examples.</figcaption>
+          </figure>
+
           <p>
             GAN-based methods have been used for image reconstruction, denoising, super-resolution, and modality translation across MRIs, CT scans, X-rays, and ultrasound. However, GANs can be unstable to train, may lack generalizability, and often require clinical validation before they are useful in practice.
           </p>
@@ -93,10 +98,20 @@
             Diffusion models work differently. They learn to add noise to data and then reverse the process step by step. Latent diffusion improves efficiency by performing this process in a compressed latent space. Medical diffusion systems can generate realistic 3D scans, segmentation masks, or domain-conditioned images, but they still face high computational cost, limited clinical validation, and demographic bias risks.
           </p>
 
+          <figure class="article-figure">
+            <img src="/images/blog/synthetic/diffusion-process.png" alt="Forward diffusion adding noise and reverse denoising generating a sample">
+            <figcaption>Diffusion models learn a reverse denoising process that turns noise back into realistic samples.</figcaption>
+          </figure>
+
           <h2>Tabular data</h2>
           <p>
             Synthetic tabular data is used in healthcare, finance, education, transportation, and other domains where privacy restrictions limit data sharing. Generation methods include GANs, diffusion models, LLM-based approaches, post-processing pipelines, and meta-learning methods.
           </p>
+
+          <figure class="article-figure">
+            <img src="/images/blog/synthetic/tabular-generation-pipeline.png" alt="Synthetic tabular data generation pipeline with generation methods, post-processing, and evaluation">
+            <figcaption>Tabular generation workflows usually need generation, post-processing, and evaluation for fidelity, privacy, and downstream performance.</figcaption>
+          </figure>
 
           <p>
             GAN-based tabular methods can model categorical and continuous variables, but they often struggle with training instability, mode collapse, and multimodal distributions. Diffusion methods such as tabular denoising approaches can better model heterogeneous features and inter-column dependencies.
@@ -111,6 +126,11 @@
             TabPFN is a notable example of a tabular foundation model trained entirely on synthetic data. It is pretrained on many synthetic tabular datasets generated from structural causal models, learning how to predict masked targets across small supervised learning tasks.
           </p>
 
+          <figure class="article-figure">
+            <img src="/images/blog/synthetic/tabpfn.png" alt="TabPFN training and inference diagram for synthetic and real tabular datasets">
+            <figcaption>TabPFN uses synthetic tabular tasks during pretraining, then applies the learned prior to unseen real-world datasets.</figcaption>
+          </figure>
+
           <p>
             This approach works especially well for small to medium-sized datasets. Its limits appear when real data differs from the synthetic pretraining distribution or when datasets become large enough that gradient boosting and ensemble methods remain stronger.
           </p>
@@ -119,6 +139,11 @@
           <p>
             LLMs can generate synthetic code from natural language prompts, function signatures, tests, and input-output examples. Open-weight code models and coding assistants show how synthetic code can support code completion, debugging, and program synthesis.
           </p>
+
+          <figure class="article-figure">
+            <img src="/images/blog/synthetic/code-synthesis.png" alt="Synthetic code generation workflow with raw functions, input-output generation, and training sample synthesis">
+            <figcaption>Code synthesis can use executable input-output examples, making generated data easier to verify than open-ended text.</figcaption>
+          </figure>
 
           <p>
             A major advantage of code is automatic verification. Generated code can be run, compiled, unit-tested, and corrected. This makes iterative self-improvement more practical than in open-ended text generation, where evaluation is often subjective.
@@ -142,6 +167,19 @@
           <p>
             The strongest workflows will not simply generate more data. They will combine generation, filtering, validation, human review, privacy testing, and downstream evaluation. Synthetic data is useful when it helps models learn what matters, not when it merely makes datasets larger.
           </p>
+
+          <h2>References</h2>
+          <ul>
+            <li><a href="https://epoch.ai/blog/will-we-run-out-of-data-limits-of-llm-scaling-based-on-human-generated-data">Will we run out of data? Limits of LLM scaling based on human-generated data</a></li>
+            <li><a href="https://arxiv.org/abs/1406.2661">Generative Adversarial Networks</a></li>
+            <li><a href="https://arxiv.org/abs/1703.10593">Unpaired Image-to-Image Translation using Cycle-Consistent Adversarial Networks</a></li>
+            <li><a href="https://stability.ai/news/stable-diffusion-public-release">Stable Diffusion public release</a></li>
+            <li><a href="https://github.com/FirasGit/medicaldiffusion">Medical Diffusion</a></li>
+            <li><a href="https://medart-ai.github.io/">Med-Art</a></li>
+            <li><a href="https://www.nature.com/articles/s41586-024-08328-6">Accurate predictions on small data with a tabular foundation model</a></li>
+            <li><a href="https://ai.meta.com/blog/code-llama-large-language-model-coding/">Code Llama</a></li>
+            <li><a href="https://arxiv.org/pdf/2504.16506">Case2Code: Learning Inductive Reasoning with Synthetic Input-Output Transformations</a></li>
+          </ul>
         </div>
       </article>
     </main>
