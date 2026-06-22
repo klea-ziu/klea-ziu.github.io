@@ -186,6 +186,50 @@ h3 {
   font-style: normal;
 }
 
+.section-heading {
+  max-width: 720px;
+  margin-bottom: 30px;
+}
+
+.research-section h2 {
+  max-width: 680px;
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.research-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.research-grid li {
+  min-height: 190px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.research-grid strong,
+.research-grid span {
+  display: block;
+}
+
+.research-grid strong {
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.research-grid span {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
 .two-column {
   display: grid;
   grid-template-columns: 0.86fr 1.14fr;
@@ -489,6 +533,10 @@ h3 {
     gap: 34px;
   }
 
+  .research-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .blog-index {
     padding: 46px 0 64px;
   }
@@ -525,5 +573,15 @@ h3 {
   .site-footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .research-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .research-grid li {
+    min-height: 0;
   }
 }
