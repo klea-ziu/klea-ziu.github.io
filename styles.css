@@ -230,6 +230,99 @@ h3 {
   line-height: 1.55;
 }
 
+.publications-section {
+  display: block;
+}
+
+.publications-title {
+  font-family: inherit;
+  font-size: 28px;
+  font-weight: 760;
+}
+
+.publication-tabs {
+  margin-top: 34px;
+}
+
+.publication-tab-input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.topic-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.topic-row span {
+  margin-right: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 760;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.topic-row label {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#pub-recent:checked ~ .topic-row label[for="pub-recent"],
+#pub-science:checked ~ .topic-row label[for="pub-science"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.publication-panel {
+  display: none;
+}
+
+#pub-recent:checked ~ .publication-panels .recent-panel,
+#pub-science:checked ~ .publication-panels .science-panel {
+  display: grid;
+}
+
+.publication-panels {
+  max-width: 840px;
+}
+
+.publication-panel {
+  gap: 18px;
+}
+
+.publication-item {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.publication-item h3 {
+  font-size: 20px;
+}
+
+.publication-item p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.publication-empty p {
+  margin: 0;
+}
+
 .two-column {
   display: grid;
   grid-template-columns: 0.86fr 1.14fr;
