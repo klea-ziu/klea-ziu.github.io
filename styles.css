@@ -298,20 +298,23 @@ h3 {
 }
 
 .publication-panels {
-  max-width: 840px;
+  max-width: 100%;
 }
 
 .publication-panel {
-  gap: 18px;
+  gap: 16px;
 }
 
 .publication-item {
-  padding: 20px 0;
-  border-top: 1px solid var(--line);
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
 }
 
 .publication-item h3 {
-  font-size: 20px;
+  font-size: 18px;
+  line-height: 1.3;
 }
 
 .publication-item p {
@@ -319,12 +322,61 @@ h3 {
   color: var(--muted);
 }
 
+.publication-venue {
+  font-size: 15px;
+  font-style: italic;
+}
+
+.publication-note {
+  font-size: 15px;
+}
+
+.publication-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.publication-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 5px 10px;
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  color: var(--accent);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.publication-links a:hover {
+  background: var(--accent-soft);
+  text-decoration: none;
+}
+
 .publication-empty p {
   margin: 0;
 }
 
 .blog-preview-section .section-heading {
+  max-width: none;
   margin-bottom: 0;
+}
+
+.single-line-title {
+  max-width: none;
+  white-space: nowrap;
+}
+
+.blog-preview-section .single-line-title {
+  font-size: 34px;
+}
+
+.blog-index .single-line-title {
+  font-size: 38px;
 }
 
 .blog-card-list.home-blog-list {
@@ -664,6 +716,11 @@ h3 {
     font-size: 34px;
   }
 
+  .blog-preview-section .single-line-title,
+  .blog-index .single-line-title {
+    font-size: 22px;
+  }
+
   .blog-card-list {
     margin-top: 34px;
   }
@@ -701,6 +758,11 @@ h3 {
 }
 
 @media (max-width: 560px) {
+  .blog-preview-section .single-line-title,
+  .blog-index .single-line-title {
+    font-size: 17px;
+  }
+
   .research-grid {
     grid-template-columns: 1fr;
   }
