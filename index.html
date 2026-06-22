@@ -52,7 +52,7 @@
       <section class="section research-section" id="research">
         <div class="section-heading">
           <p class="section-label">Research Focus</p>
-          <h2>Methods for scientific discovery</h2>
+          <h2>Methods for Scientific Discovery</h2>
         </div>
         <ul class="research-grid">
           <li>
@@ -109,34 +109,39 @@
         </div>
       </section>
 
-      <section class="section two-column">
-        <div>
+      <section class="section blog-preview-section">
+        <div class="section-heading">
           <p class="section-label">Blog</p>
-          <h2>Notes on ML, chemistry, and research life</h2>
+          <h2>Notes on ML, Chemistry, and Research Life</h2>
         </div>
-        <div class="post-list">
-          <a class="post-link" href="/blog/gradient-issues-foundation-models.html">
-            <span>Foundation Models · October 2025</span>
-            <strong>How to monitor, diagnose, and solve gradient issues in foundation models</strong>
-            <em>A practical guide to layer-wise gradient tracking with PyTorch and a runnable Colab notebook.</em>
-          </a>
-          <a class="post-link" href="/blog/synthetic-data-llm-training.html">
-            <span>LLM Training · September 2025</span>
-            <strong>Synthetic data for LLM training</strong>
-            <em>Where synthetic data helps, where it fails, and how it is generated.</em>
-          </a>
-          <a class="post-link" href="/blog/multimodal-large-language-models.html">
-            <span>Multimodal AI · August 2025</span>
-            <strong>Multimodal large language models</strong>
-            <em>An overview of multimodal LLM architecture, examples, and limitations.</em>
-          </a>
-          <a class="post-link" href="/blog/ml-for-chemistry.html">
-            <span>Scientific ML · July 2025</span>
-            <strong>What makes ML for chemistry different?</strong>
-            <em>A short note on data, structure, and scientific trust.</em>
-          </a>
-          <a class="text-link" href="/blog/">All posts</a>
+
+        <div class="blog-card-list home-blog-list" aria-label="Recent blog posts">
+          <article class="blog-card">
+            <p class="blog-card-date">October 2025</p>
+            <h2>How to monitor, diagnose, and solve gradient issues in foundation models</h2>
+            <p>A practical guide to vanishing gradients, exploding gradients, layer-wise gradient tracking, and stabilization techniques using PyTorch and Colab.</p>
+            <a href="/blog/gradient-issues-foundation-models.html">Read article &rarr;</a>
+          </article>
+          <article class="blog-card">
+            <figure class="blog-card-media">
+              <img src="/images/blog/synthetic/tabular-generation-pipeline.png" alt="Synthetic tabular data generation pipeline with generation, post-processing, and evaluation steps">
+            </figure>
+            <p class="blog-card-date">September 2025</p>
+            <h2>Synthetic data for LLM training</h2>
+            <p>Where synthetic data is useful, where it is risky, and how GANs, diffusion models, LLMs, and meta-learning approaches generate training data.</p>
+            <a href="/blog/synthetic-data-llm-training.html">Read article &rarr;</a>
+          </article>
+          <article class="blog-card">
+            <figure class="blog-card-media">
+              <img src="/images/blog/multimodal-pdf/glasses-translation.png" alt="Broken drinking glasses resolving the ambiguity of translating the word glasses">
+            </figure>
+            <p class="blog-card-date">August 2025</p>
+            <h2>Multimodal large language models</h2>
+            <p>An overview of how multimodal LLMs combine text, images, audio, and other modalities to reason across richer inputs.</p>
+            <a href="/blog/multimodal-large-language-models.html">Read article &rarr;</a>
+          </article>
         </div>
+        <a class="text-link blog-more-link" href="/blog/">All posts</a>
       </section>
     </main>
 

@@ -323,6 +323,32 @@ h3 {
   margin: 0;
 }
 
+.blog-preview-section .section-heading {
+  margin-bottom: 0;
+}
+
+.blog-card-list.home-blog-list {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 30px;
+}
+
+.home-blog-list .blog-card {
+  padding: 24px;
+}
+
+.home-blog-list .blog-card h2 {
+  font-size: 20px;
+}
+
+.home-blog-list .blog-card p:not(.blog-card-date) {
+  font-size: 15px;
+}
+
+.blog-more-link {
+  display: inline-block;
+  margin-top: 24px;
+}
+
 .two-column {
   display: grid;
   grid-template-columns: 0.86fr 1.14fr;
@@ -640,6 +666,11 @@ h3 {
 
   .blog-card-list {
     margin-top: 34px;
+  }
+
+  .home-blog-list {
+    grid-template-columns: 1fr;
+    margin-top: 28px;
   }
 
   .blog-card {
