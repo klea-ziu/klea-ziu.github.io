@@ -324,7 +324,7 @@ h3 {
 
 .publication-media-card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 330px);
+  grid-template-columns: minmax(0, 1fr) 220px;
   gap: 24px;
   align-items: center;
 }
@@ -333,6 +333,7 @@ h3 {
   position: relative;
   display: block;
   overflow: hidden;
+  width: 220px;
   border: 1px solid rgba(21, 26, 23, 0.16);
   border-radius: 8px;
   color: #ffffff;
@@ -343,6 +344,7 @@ h3 {
 .publication-media img {
   display: block;
   width: 100%;
+  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 
@@ -351,18 +353,15 @@ h3 {
 }
 
 .publication-video img {
-  aspect-ratio: 16 / 9;
   opacity: 0.82;
 }
 
 .publication-poster {
-  max-width: 230px;
   justify-self: end;
   background: #f4f5f1;
 }
 
 .publication-poster img {
-  aspect-ratio: 2 / 3;
   object-position: top;
 }
 
@@ -371,25 +370,15 @@ h3 {
   top: 50%;
   left: 50%;
   display: grid;
-  width: 58px;
-  height: 58px;
+  width: 42px;
+  height: 42px;
   place-items: center;
-  border: 4px solid #ffffff;
+  border: 3px solid #ffffff;
   border-radius: 50%;
   background: rgba(21, 26, 23, 0.28);
-  font-size: 22px;
+  font-size: 16px;
   line-height: 1;
   transform: translate(-50%, -50%);
-}
-
-.publication-media-title {
-  position: absolute;
-  right: 18px;
-  bottom: 18px;
-  left: 18px;
-  font-size: 20px;
-  font-weight: 760;
-  line-height: 1.2;
 }
 
 .publication-media:hover img {
@@ -788,11 +777,10 @@ h3 {
   }
 
   .publication-media {
-    max-width: 460px;
+    width: min(220px, 100%);
   }
 
   .publication-poster {
-    max-width: 220px;
     justify-self: start;
   }
 
@@ -848,10 +836,6 @@ h3 {
 @media (max-width: 560px) {
   .blog-preview-section .single-line-title,
   .blog-index .single-line-title {
-    font-size: 17px;
-  }
-
-  .publication-media-title {
     font-size: 17px;
   }
 
