@@ -570,29 +570,97 @@ h3 {
   width: min(980px, calc(100% - 40px));
 }
 
-.photography-grid {
+.photo-viewer {
   display: grid;
-  gap: 28px;
+  grid-template-columns: 48px minmax(0, 1fr) 48px;
+  gap: 16px;
+  align-items: center;
+}
+
+.photo-stage {
   margin: 0;
 }
 
-.photography-grid figure {
-  margin: 0;
-}
-
-.photography-grid img {
+.photo-stage img {
   display: block;
   width: 100%;
-  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--paper);
 }
 
-.photography-grid figcaption {
-  margin-top: 8px;
+.photo-stage figcaption {
+  margin-top: 10px;
   color: var(--muted);
   font-size: 14px;
+  text-align: center;
+}
+
+.photo-nav {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--accent);
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.photo-nav:hover,
+.photo-nav:focus-visible {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.photography-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin: 28px 0 0;
+}
+
+.photo-thumb {
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+}
+
+.photo-thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.photo-thumb span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.photo-thumb:hover,
+.photo-thumb:focus-visible,
+.photo-thumb.is-active {
+  border-color: var(--accent);
+}
+
+.photo-thumb.is-active span {
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .copyright {
@@ -870,6 +938,21 @@ h3 {
 
   .portrait {
     max-width: 260px;
+  }
+
+  .photo-viewer {
+    grid-template-columns: 40px minmax(0, 1fr) 40px;
+    gap: 10px;
+  }
+
+  .photo-nav {
+    width: 40px;
+    height: 40px;
+    font-size: 28px;
+  }
+
+  .photography-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .site-footer {

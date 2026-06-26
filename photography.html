@@ -25,19 +25,59 @@
         A personal collection of light, places, and small moments.
       </p>
 
-      <section class="photography-grid" aria-label="Photography gallery">
-        <figure>
-          <img src="/images/photography/golden-gate-sunset.jpg" alt="Golden Gate Bridge at dusk from the beach">
-          <figcaption>Golden Gate at dusk</figcaption>
+      <section class="photo-viewer" aria-label="Selected photograph">
+        <button class="photo-nav photo-prev" type="button" aria-label="Previous photograph" data-photo-prev>
+          &lsaquo;
+        </button>
+        <figure class="photo-stage">
+          <img
+            src="/images/photography/golden-gate-sunset.jpg"
+            alt="Golden Gate Bridge at dusk from the beach"
+            data-photo-image>
+          <figcaption data-photo-caption>Golden Gate at dusk</figcaption>
         </figure>
-        <figure>
-          <img src="/images/photography/twilight-sky.jpg" alt="Pastel twilight sky above a city terrace">
-          <figcaption>Twilight sky</figcaption>
-        </figure>
-        <figure>
-          <img src="/images/photography/ocean-sunset.jpg" alt="Ocean sunset with waves and a dark coastline">
-          <figcaption>Ocean sunset</figcaption>
-        </figure>
+        <button class="photo-nav photo-next" type="button" aria-label="Next photograph" data-photo-next>
+          &rsaquo;
+        </button>
+      </section>
+
+      <section class="photography-grid" aria-label="Photography thumbnails">
+        <button
+          class="photo-thumb is-active"
+          type="button"
+          data-photo-src="/images/photography/golden-gate-sunset.jpg"
+          data-photo-alt="Golden Gate Bridge at dusk from the beach"
+          data-photo-caption="Golden Gate at dusk">
+          <img src="/images/photography/golden-gate-sunset.jpg" alt="">
+          <span>Golden Gate at dusk</span>
+        </button>
+        <button
+          class="photo-thumb"
+          type="button"
+          data-photo-src="/images/photography/twilight-sky.jpg"
+          data-photo-alt="Pastel twilight sky above a city terrace"
+          data-photo-caption="Twilight sky">
+          <img src="/images/photography/twilight-sky.jpg" alt="">
+          <span>Twilight sky</span>
+        </button>
+        <button
+          class="photo-thumb"
+          type="button"
+          data-photo-src="/images/photography/ocean-sunset.jpg"
+          data-photo-alt="Ocean sunset with waves and a dark coastline"
+          data-photo-caption="Ocean sunset">
+          <img src="/images/photography/ocean-sunset.jpg" alt="">
+          <span>Ocean sunset</span>
+        </button>
+        <button
+          class="photo-thumb"
+          type="button"
+          data-photo-src="/images/photography/marina-sunset.jpg"
+          data-photo-alt="Marina at sunset with boats and vivid orange clouds"
+          data-photo-caption="Marina sunset">
+          <img src="/images/photography/marina-sunset.jpg" alt="">
+          <span>Marina sunset</span>
+        </button>
       </section>
 
       <p class="copyright">
@@ -52,5 +92,34 @@
         <a href="https://www.linkedin.com/in/klea-ziu">LinkedIn</a>
       </div>
     </footer>
+
+    <script>
+      const photoImage = document.querySelector("[data-photo-image]");
+      const photoCaption = document.querySelector("[data-photo-caption]");
+      const photoPrev = document.querySelector("[data-photo-prev]");
+      const photoNext = document.querySelector("[data-photo-next]");
+      const photoThumbs = Array.from(document.querySelectorAll(".photo-thumb"));
+      let activePhotoIndex = 0;
+
+      function showPhoto(index) {
+        activePhotoIndex = (index + photoThumbs.length) % photoThumbs.length;
+        const activeThumb = photoThumbs[activePhotoIndex];
+
+        photoImage.src = activeThumb.dataset.photoSrc;
+        photoImage.alt = activeThumb.dataset.photoAlt;
+        photoCaption.textContent = activeThumb.dataset.photoCaption;
+
+        photoThumbs.forEach((thumb, thumbIndex) => {
+          thumb.classList.toggle("is-active", thumbIndex === activePhotoIndex);
+        });
+      }
+
+      photoThumbs.forEach((thumb, index) => {
+        thumb.addEventListener("click", () => showPhoto(index));
+      });
+
+      photoPrev.addEventListener("click", () => showPhoto(activePhotoIndex - 1));
+      photoNext.addEventListener("click", () => showPhoto(activePhotoIndex + 1));
+    </script>
   </body>
 </html>
