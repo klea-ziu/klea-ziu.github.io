@@ -559,6 +559,35 @@ h3 {
   font-size: 18px;
 }
 
+.photography-page {
+  width: min(980px, calc(100% - 40px));
+}
+
+.photography-grid {
+  display: grid;
+  gap: 28px;
+  margin: 0;
+}
+
+.photography-grid figure {
+  margin: 0;
+}
+
+.photography-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+}
+
+.photography-grid figcaption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .copyright {
   margin: 42px 0 0;
   padding-top: 22px;
