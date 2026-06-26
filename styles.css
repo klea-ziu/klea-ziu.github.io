@@ -125,10 +125,10 @@ h3 {
 
 .hero-quote {
   max-width: 620px;
-  margin: 18px 0 0;
+  margin: 10px 0 0;
   color: var(--muted);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(18px, 2.2vw, 26px);
+  font-size: clamp(20px, 2.6vw, 32px);
   font-style: italic;
   line-height: 1.45;
 }
