@@ -170,6 +170,17 @@ h3 {
   box-shadow: 0 22px 55px rgba(21, 26, 23, 0.12);
 }
 
+.portrait figcaption {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.portrait figcaption a {
+  text-decoration: none;
+}
+
 .section {
   padding: 58px 0;
   border-bottom: 1px solid var(--line);
