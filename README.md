@@ -7,7 +7,6 @@ This is a lightweight static replacement for the current Academic Pages site.
 - `index.html` is the homepage.
 - `styles.css` contains all shared styling.
 - `blog/index.html` is the blog landing page.
-- `blog/ml-for-chemistry.html` is a starter post.
 - `blog/multimodal-large-language-models.html` is the edited multimodal LLM post.
 - `blog/gradient-issues-foundation-models.html` is the edited gradient-monitoring post, updated from Neptune.ai to Weights & Biases.
 - `blog/synthetic-data-llm-training.html` is the edited synthetic data post.
