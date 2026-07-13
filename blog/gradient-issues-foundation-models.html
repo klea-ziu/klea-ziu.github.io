@@ -12,9 +12,12 @@
     <meta property="og:description" content="A practical guide to monitoring, diagnosing, and solving vanishing and exploding gradients using PyTorch and Colab.">
     <meta property="og:url" content="https://klea-ziu.github.io/blog/gradient-issues-foundation-models.html">
     <meta property="og:site_name" content="Klea Ziu">
-    <meta name="twitter:card" content="summary">
+    <meta property="og:image" content="https://klea-ziu.github.io/images/blog/gradient/loss-and-total-gradient-norm.png">
+    <meta property="og:image:alt" content="Training loss and total gradient norm for stable, aggressive, and gradient-clipped runs">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="How to Monitor Gradient Issues in Foundation Models">
     <meta name="twitter:description" content="A practical guide to monitoring, diagnosing, and solving vanishing and exploding gradients using PyTorch and Colab.">
+    <meta name="twitter:image" content="https://klea-ziu.github.io/images/blog/gradient/loss-and-total-gradient-norm.png">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -23,6 +26,7 @@
         "description": "A practical guide to monitoring, diagnosing, and solving vanishing and exploding gradients in foundation models using PyTorch and a runnable Colab notebook.",
         "url": "https://klea-ziu.github.io/blog/gradient-issues-foundation-models.html",
         "mainEntityOfPage": "https://klea-ziu.github.io/blog/gradient-issues-foundation-models.html",
+        "image": "https://klea-ziu.github.io/images/blog/gradient/loss-and-total-gradient-norm.png",
         "inLanguage": "en",
         "isPartOf": {
           "@id": "https://klea-ziu.github.io/#website"
@@ -125,6 +129,11 @@
             The runnable notebook tracks a BERT-style sequence classification model in PyTorch and plots the metrics directly in Colab. For large models, you should usually log selected layers or aggregate norms at the block level rather than logging every parameter every step.
           </p>
 
+          <figure class="article-figure">
+            <img src="/images/blog/gradient/loss-and-total-gradient-norm.png" alt="Training loss and total gradient norm across stable, aggressive, and gradient-clipped configurations" loading="lazy">
+            <figcaption>Training loss and total gradient norm from the verified notebook runs. The gradient-norm plot uses a logarithmic scale.</figcaption>
+          </figure>
+
           <h2>Step 1: Create a local metric history</h2>
           <pre><code>history = []
 
@@ -195,6 +204,21 @@ for epoch in range(10):
           <p>
             In one typical BERT-style debugging setup, a very large learning rate can cause both loss and gradient norms to become NaN within a few steps. Reducing the learning rate may prevent immediate divergence, but the model can still fail to converge if gradients in key layers do not evolve. Lowering the learning rate further, adding warmup, or adjusting initialization can produce smoother loss and more meaningful gradient flow.
           </p>
+
+          <figure class="article-figure">
+            <img src="/images/blog/gradient/stable-layerwise-gradient-norms.png" alt="Heatmap of grouped gradient norms during the stable learning-rate run" loading="lazy">
+            <figcaption>Grouped gradient norms during the stable learning-rate run.</figcaption>
+          </figure>
+
+          <figure class="article-figure">
+            <img src="/images/blog/gradient/aggressive-layerwise-gradient-norms.png" alt="Heatmap of grouped gradient norms during the aggressive learning-rate run" loading="lazy">
+            <figcaption>Grouped gradient norms under the deliberately aggressive learning rate.</figcaption>
+          </figure>
+
+          <figure class="article-figure">
+            <img src="/images/blog/gradient/clipped-layerwise-gradient-norms.png" alt="Heatmap of grouped gradient norms during the aggressive learning-rate run with clipping" loading="lazy">
+            <figcaption>Grouped gradient norms with the aggressive learning rate and gradient clipping at 1.0.</figcaption>
+          </figure>
 
           <h2>Techniques for gradient stabilization</h2>
           <ul>
