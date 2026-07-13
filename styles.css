@@ -248,8 +248,14 @@ h3 {
   font-weight: 760;
 }
 
+.publications-intro {
+  max-width: 720px;
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
 .publication-tabs {
-  margin-top: 34px;
+  margin-top: 26px;
 }
 
 .publication-tab-input {
@@ -330,6 +336,16 @@ h3 {
   color: var(--muted);
 }
 
+.publication-item .publication-authors {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.publication-authors strong {
+  color: var(--ink);
+  font-weight: 760;
+}
+
 .publication-media-card {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 220px;
@@ -402,6 +418,32 @@ h3 {
   font-size: 15px;
 }
 
+.publication-item .publication-summary {
+  max-width: 760px;
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.publication-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.publication-tags li {
+  padding: 4px 8px;
+  border-radius: 4px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
 .publication-links {
   display: flex;
   flex-wrap: wrap;
@@ -426,6 +468,13 @@ h3 {
 .publication-links a:hover {
   background: var(--accent-soft);
   text-decoration: none;
+}
+
+.publication-full-list {
+  display: inline-block;
+  margin-top: 24px;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 .publication-empty p {
