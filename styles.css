@@ -445,7 +445,7 @@ h3 {
   font-weight: 700;
 }
 
-.talks-title {
+.experience-title {
   font-family: inherit;
   font-size: 28px;
   font-weight: 760;
@@ -463,6 +463,10 @@ h3 {
   align-items: center;
   padding: 28px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.teaching-item {
+  grid-template-columns: minmax(0, 1fr);
 }
 
 .talk-meta {
