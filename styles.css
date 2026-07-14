@@ -46,11 +46,20 @@ a:hover {
 }
 
 .site-header {
+  position: sticky;
+  z-index: 50;
+  top: 0;
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 28px 0 18px;
+  margin: 0;
+  padding: 18px max(20px, calc((100% - var(--max)) / 2));
+  border-bottom: 1px solid rgba(221, 227, 220, 0.9);
+  background: rgba(251, 250, 246, 0.94);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 
 .brand {
@@ -190,6 +199,7 @@ h3 {
 }
 
 .section {
+  scroll-margin-top: 84px;
   padding: 58px 0;
   border-bottom: 1px solid var(--line);
 }
@@ -1110,11 +1120,28 @@ h3 {
   .site-header {
     align-items: flex-start;
     flex-direction: column;
+    gap: 8px;
+    padding: 12px 20px 10px;
   }
 
   nav {
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    gap: 18px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .section {
+    scroll-margin-top: 110px;
   }
 
   .hero,
