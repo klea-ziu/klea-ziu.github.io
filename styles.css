@@ -498,6 +498,29 @@ h3 {
   margin-top: 2px;
 }
 
+.talk-appearances {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.talk-appearances li {
+  padding-left: 14px;
+  border-left: 2px solid var(--line);
+}
+
+.talk-appearances li + li {
+  margin-top: 16px;
+}
+
+.talk-appearances .talk-meta {
+  margin-bottom: 4px;
+}
+
+.talk-appearances .talk-venue {
+  margin-top: 0;
+}
+
 .talk-links {
   display: flex;
   flex-wrap: wrap;
